@@ -6,7 +6,7 @@ from TelaPerecivel import TelaPerecivel
 from FormCidade import FormCidade
 
 from FormCliente import FormCliente
-from FormListarClientes import FormListarClientes
+from ListarClientes import ListarClientes
 
 cidades = []
 clientes = []
@@ -19,8 +19,9 @@ telaCid.show()
 telaCli = FormCliente( listaClientes=clientes ,listaCidades=cidades)
 telaCli.show()
 
-telaListaCli = FormListarClientes(listaClientes=clientes)
+telaListaCli = ListarClientes(listaClientes=clientes)
 telaListaCli.show()
+
 sys.exit(app.exec_())
 
 
