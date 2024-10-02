@@ -1,11 +1,13 @@
 import sys 
 from PyQt5.QtWidgets import *
 from Cidade import Cidade
+from FormCliente import FormCliente
 
 class FormCidade(QMainWindow):
-    def __init__(self, titulo="Cadastro de cidade", listaCidades = [] ):
+    def __init__(self, titulo="Cadastro de cidade", listaCidades = [], telaCliente = None ):
         super().__init__()
         self.cidades = listaCidades
+        self.telaCliente = telaCliente
 
         self.setWindowTitle(titulo)
         self.setGeometry(100, 100, 300, 100)
@@ -32,4 +34,7 @@ class FormCidade(QMainWindow):
         if len(self.txtNome.text() ) > 0:
             cid = Cidade(nome=self.txtNome.text())
             self.cidades.append(cid)
+            self.txtNome.clear()
             QMessageBox.information( self, "Cidade Salva", str(cid))
+            self.telaCliente.carregarCidades()
+            self.hide()

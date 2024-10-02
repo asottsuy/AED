@@ -3,11 +3,18 @@ from PyQt5.QtWidgets import *
 from Cidade import Cidade
 from Pessoa import Pessoa
 
+
 class FormCliente(QMainWindow):
-    def __init__(self, titulo="Cadastro de cliente", listaClientes = [], listaCidades = []):
+    def __init__(self, titulo="Cadastro de cliente", listaClientes = [], listaCidades = [], telaCidade = None):
         super().__init__()
         self.clientes = listaClientes
         self.cidades = listaCidades
+        self.telaCidade = telaCidade
+        self.telaListaClientes = None
+
+
+        if self.telaCidade != None:
+            self.telaCidade.telaCliente = self
 
         self.setWindowTitle(titulo)
         self.setGeometry(450, 100, 300, 100)
@@ -34,15 +41,26 @@ class FormCliente(QMainWindow):
         self.layout.addWidget(self.lblAltura)
         self.layout.addWidget(self.txtAltura)
 
-        self.btnCarregarCidades = QPushButton("Atualizar lista de cidades", self)
-        self.btnCarregarCidades.clicked.connect(self.carregarCidades)
-        self.layout.addWidget(self.btnCarregarCidades)
+        #self.btnCarregarCidades = QPushButton("Atualizar lista de cidades", self)
+        #self.btnCarregarCidades.clicked.connect(self.carregarCidades)
+        #self.layout.addWidget(self.btnCarregarCidades)
 
         self.lblCidade = QLabel("Cidade: ")
         self.cmbCidade = QComboBox(self)
+        self.cmbCidade.currentIndexChanged.connect( self.abrirTelaCidade)
         self.layout.addWidget(self.lblCidade)
         self.layout.addWidget(self.cmbCidade)
         self.carregarCidades()
+
+
+
+    def carregarCidades(self):
+        self.cmbCidade.clear()
+        self.cmbCidade.addItem("Selecione...", None)
+        self.cmbCidade.addItem("Adicionar nova Cidade...", None)
+
+        for cid in self.cidades:
+            self.cmbCidade.addItem(cid.nome, cid)
 
     def salvar(self):
         if len(self.txtNome.text() ) > 0:
@@ -51,7 +69,7 @@ class FormCliente(QMainWindow):
             if len(altura) > 0:
                 altura = altura.replace(",",".")
                 cli.altura = round(float(altura),2) 
-            if self.cmbCidade.currentIndex() > 0:
+            if self.cmbCidade.currentIndex() > 1:
                 cli.cidade = self.cmbCidade.currentData()
 
             self.clientes.append(cli)
@@ -59,10 +77,10 @@ class FormCliente(QMainWindow):
             self.txtAltura.clear()
             self.cmbCidade.setCurrentIndex(0)
             QMessageBox.information( self, "Cliente Salvo", str(cli))
+            self.telaListaClientes.atualizarTabela()
+            self.hide()
 
-    def carregarCidades(self):
-        self.cmbCidade.clear()
-        self.cmbCidade.addItem("Selecione...", None)
-        for cid in self.cidades:
-            self.cmbCidade.addItem(cid.nome, cid)
+    def abrirTelaCidade(self):
+        if self.cmbCidade.currentIndex() == 1:
+            self.telaCidade.show()
 
