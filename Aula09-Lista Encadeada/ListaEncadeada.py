@@ -68,7 +68,6 @@ class ListaEncadeada:
         self.imprimir()
 
 
-
     def imprimir(self):
         print("\n----------------------------------")
         if self.inicio == None:
