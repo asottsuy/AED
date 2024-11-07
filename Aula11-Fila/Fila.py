@@ -24,9 +24,7 @@ class Fila:
         self.imprimir()
 
     def dequeue(self): #remove o primeiro da fila
-        aux = self.inicio.prox
         self.inicio = self.inicio.prox
-        self.inicio.prox = aux
 
         self.tamanho -= 1
         self.imprimir()
