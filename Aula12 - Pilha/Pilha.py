@@ -16,7 +16,10 @@ class Pilha:
         self.imprimir()
     
     def removerTopo(self):
-        self.topo = self.topo.prox #atual topo e apagado e o que o topo anterior apontava agora e o novo topo
+        if self.topo is None:
+            print("Pilha já está vazia!!")
+        else:
+            self.topo = self.topo.prox #atual topo e apagado e o que o topo anterior apontava agora e o novo topo
         self.imprimir()
 
     def imprimir(self):
