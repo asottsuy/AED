@@ -1,0 +1,9 @@
+                Lista Encadeada:
+
+    • Estrutura que armazena um conjunto de elementos, em
+uma determinada sequência.
+    • Permite alocação dinâmica de memória.
+    • É constituída por elementos que possuem uma estrutura
+composta de valor e endereço do próximo elemento.
+    • Se estivermos no último elemento da lista, o campo para o
+endereço terá como valor: NULL

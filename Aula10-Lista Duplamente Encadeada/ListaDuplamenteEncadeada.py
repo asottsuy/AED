@@ -28,7 +28,7 @@ class ListaDuplamenteEncadeada:
                 
                 nodo.prox = aux.prox #o novo nodo vai apontar para o que o aux apontava
                 
-                if aux.prox is not None: #se nao for o ultimo da lista
+                if aux.prox: #se nao for o ultimo da lista
                     aux.prox.ant = nodo #o ant do proximo do aux vai apontar para o nodo
                 else:
                     self.final = nodo
@@ -40,10 +40,10 @@ class ListaDuplamenteEncadeada:
 
     def imprimir(self): 
         print("\n----------------------------------")
-        if self.inicio == None:
+        if self.inicio == None: #verifica se a lista esta vazia
             print( "\nLista Encadeada vazia!")
         else:
-            aux = self.inicio
+            aux = self.inicio #define q o aux e o inicio e vai printando em ordem crescente, passando o aux = aux.prox
             while aux:
                 print( aux.dado )
                 aux = aux.prox
@@ -54,7 +54,7 @@ class ListaDuplamenteEncadeada:
         if self.inicio == None:
             print( "\nLista Encadeada vazia!")
         else:
-            aux = self.final
+            aux = self.final #define q o aux e o final da lista, e vai printando de tras pra frente, passando o aux como o a referencia do anterior
             while aux:
                 print(aux.dado)
                 aux = aux.ant
